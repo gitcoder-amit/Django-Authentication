@@ -15,4 +15,14 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.phone_number
+    
+
+# just for querying purpose, not for authentication
+class Order(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    order_number = models.CharField(max_length=20)
+    order_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order {self.order_number} by {self.user.phone_number}"
 
